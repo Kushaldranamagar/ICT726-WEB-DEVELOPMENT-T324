@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore Ava's favorite outfits, accessories, and beauty products."
+    />
+    <meta
+      name="keywords"
+      content="Favorites, Style, Ava, Outfits, Accessories, Beauty"
+    />
+    <meta name="author" content="Ava" />
+    <title>Favorites - Style Savvy</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <style>
+      /* General Modal Styles */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1000; /* On top of other elements */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.8
+        ); /* Black background with transparency */
+      }
+
+      /* Modal Content */
+      .modal-content {
+        position: relative;
+        background-color: #fff;
+        margin: auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 600px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center; /* Center align content */
+      }
+
+      /* Modal Image */
+      .modal-image {
+        width: 100%;
+        max-height: 300px;
+        object-fit: cover;
+        margin-bottom: 15px;
+        border-radius: 8px;
+      }
+
+      /* Modal Text */
+      .modal-content h3 {
+        margin: 20px 0 10px; /* Add some spacing for the title */
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .modal-content p {
+        text-align: center;
+        font-size: 16px;
+        color: #666;
+      }
+
+      /* Go Back Button */
+      .back-btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .back-btn:hover {
+        background-color: #555;
+      }
+    </style>
+  </head>
+  <body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">StyleSavvy</a>
+      <!-- Hamburger Icon -->
+      <button class="hamburger" id="hamburger">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </button>
+      <!-- Navigation Links -->
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="favorites.html">Favorites</a></li>
+        <li><a href="trending.html">Trending</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+    <main>
+      <section class="favorites-section">
+        <h1>Ava's Favorite Outfits</h1>
+        <p>Explore Ava’s top picks that bring out timeless style and elegance.</p>
+        
+        <div class="favorites-grid">
+            <!-- Favorite Item 1 -->
+            <div class="favorite-card">
+                <img src="images/minimalist blazer.avif" alt="Minimalist Blazers">
+                <h2>Minimalist Blazers</h2>
+                <p>Perfect for any occasion, these blazers are the epitome of effortless chic.</p>
+                <a href="#" class="view-more-btn">View More</a>
+            </div>
+            
+            <!-- Favorite Item 2 -->
+            <div class="favorite-card">
+                <img src="images/pastel power.jpeg" alt="Pastel Outfits">
+                <h2>Pastel Outfits</h2>
+                <p>Add soft hues to your wardrobe with these dreamy pastel outfits.</p>
+                <a href="#" class="view-more-btn">View More</a>
+            </div>
+            
+            <!-- Favorite Item 3 -->
+            <div class="favorite-card">
+                <img src="images/bold accessories.avif" alt="Bold Accessories">
+                <h2>Bold Accessories</h2>
+                <p>Make a statement with oversized earrings and layered necklaces.</p>
+                <a href="#" class="view-more-btn">View More</a>
+            </div>
+    
+            <!-- Favorite Item 4 -->
+            <div class="favorite-card">
+                <img src="images/sneakers.avif" alt="Chunky Sneakers">
+                <h2>Chunky Sneakers</h2>
+                <p>Stay trendy and comfortable with these must-have chunky sneakers.</p>
+                <a href="#" class="view-more-btn">View More</a>
+            </div>
+        </div>
+    </section>    
+    </main>
+
+    <!-- Modal Structure -->
+    <div id="popup-modal" class="modal">
+      <div class="modal-content">
+        <img id="modal-image" class="modal-image" src="" alt="Item Image" />
+        <h3 id="modal-title"></h3>
+        <p id="modal-description"></p>
+        <button class="back-btn">Go Back</button>
+        <a href="https://unsplash.com/s/photos/fashion" class="hero-btn">Visit site</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Style Savvy by Ava. All Rights Reserved.</p>
+    </footer>
+    <script src="scripts/main.js"></script>
+    <script>
+      // Get modal elements
+      const modal = document.getElementById("popup-modal");
+      const backBtn = document.querySelector(".back-btn");
+      const modalImage = document.getElementById("modal-image");
+      const modalTitle = document.getElementById("modal-title");
+      const modalDescription = document.getElementById("modal-description");
+      const viewMoreBtns = document.querySelectorAll(".view-more-btn");
+
+      // Add event listeners to all "View More" buttons
+      viewMoreBtns.forEach((button) => {
+        button.addEventListener("click", () => {
+          const card = button.parentElement; // Get the parent card
+          const img = card.querySelector("img").src;
+          const title = card.querySelector("h2").textContent;
+          const description = card.querySelector("p").textContent;
+
+          // Populate modal with card data
+          modalImage.src = img;
+          modalTitle.textContent = title;
+          modalDescription.textContent = description;
+
+          // Display the modal
+          modal.style.display = "block";
+        });
+      });
+
+      // Close the modal when the Go Back button is clicked
+      backBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+
+      // Close the modal when clicking outside the modal content
+      window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
